@@ -24,6 +24,13 @@ A real-time collaborative code editor built with React, Node.js, and Socket.IO t
 - Socket.IO
 - CORS enabled for cross-origin requests
 
+## Live Demo
+
+🌐 **Live Application**: [Recipe Generator App](https://recipe-generator-app-cwe8.onrender.com/)
+
+### Deployment
+This application is deployed on Render and is accessible at: https://recipe-generator-app-cwe8.onrender.com/
+
 ## Getting Started
 
 ### Prerequisites
@@ -34,7 +41,7 @@ A real-time collaborative code editor built with React, Node.js, and Socket.IO t
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/heerphadke/Codeverse.git
 cd collaborative-code-editor
 ```
 
