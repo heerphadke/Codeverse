@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -10,10 +12,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@y/websocket-server": "^0.1.1",
     "axios": "^1.10.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "iconv-lite": "^0.7.1",
     "mongoose": "^8.15.2",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "ws": "^8.18.3",
+    "y-leveldb": "^0.2.0",
+    "y-protocols": "^1.0.7",
+    "y-websocket": "^3.0.0",
+    "yjs": "^13.6.28"
   }
 }
