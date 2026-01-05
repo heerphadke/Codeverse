@@ -53,7 +53,7 @@ function getUserColor(userName) {
 }
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '1mb' })); // Limit request body size
 app.use('/api/judge', judgeRoutes);
 
 // Track active users per room by socket ID
@@ -81,23 +81,21 @@ wss.on('connection', (ws, req) => {
       return;
     }
     
-    console.log(`🔌 Yjs WebSocket connection for room: ${roomId}`, {
-      url: req.url,
-      headers: req.headers
-    });
+    // Only log connection/disconnect events (not every message to avoid performance overhead)
+    if (process.env.NODE_ENV !== 'production') {
+      console.log(`🔌 Yjs WebSocket connection for room: ${roomId}`);
+    }
+    
     setupWSConnection(ws, req, { 
       gc: true,
       // Room ID is used as document name
       docName: roomId
     });
     
-    // Log WebSocket events
-    ws.on('message', (data) => {
-      console.log('📨 Yjs WebSocket message received:', data.length, 'bytes');
-    });
-    
     ws.on('close', () => {
-      console.log('🔌 Yjs WebSocket closed for room:', roomId);
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`🔌 Yjs WebSocket closed for room: ${roomId}`);
+      }
     });
     
     ws.on('error', (err) => {
