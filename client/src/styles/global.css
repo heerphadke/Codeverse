@@ -1,0 +1,421 @@
+/**
+ * Codeverse Global Styles
+ * Enforced design system contracts and base styles
+ */
+
+/* Import design tokens */
+@import './tokens.css';
+
+/* ============================================
+   BASE RESET & DEFAULTS
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+/* ============================================
+   GLOBAL ICON CONTRACT (ENFORCED)
+   
+   All Lucide/SVG icons MUST follow these rules:
+   - Display as block (no inline text mixing)
+   - Never shrink in flex containers
+   - Always use .icon-text wrapper for icon+text layouts
+   ============================================ */
+
+/* Lucide icons - force block display */
+svg[class*="lucide"],
+svg[data-lucide],
+.icon {
+  display: block;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+/* All SVGs should have consistent rendering */
+svg {
+  shape-rendering: geometricPrecision;
+}
+
+/* ============================================
+   ICON-TEXT CONTRACT (REQUIRED WRAPPER)
+   
+   Usage: <div class="icon-text"><Icon /> Text</div>
+   
+   DO NOT use raw icon + text without this wrapper.
+   Linter will flag violations.
+   ============================================ */
+
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-gap-sm);
+}
+
+.icon-text--xs { gap: var(--icon-gap-xs); }
+.icon-text--sm { gap: var(--icon-gap-sm); }
+.icon-text--md { gap: var(--icon-gap-md); }
+.icon-text--lg { gap: var(--icon-gap-lg); }
+
+/* Ensure icon doesn't shrink */
+.icon-text > svg,
+.icon-text > .icon {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+.text-xs { font-size: var(--text-xs); }
+.text-sm { font-size: var(--text-sm); }
+.text-base { font-size: var(--text-base); }
+.text-lg { font-size: var(--text-lg); }
+.text-xl { font-size: var(--text-xl); }
+.text-2xl { font-size: var(--text-2xl); }
+.text-3xl { font-size: var(--text-3xl); }
+.text-4xl { font-size: var(--text-4xl); }
+.text-5xl { font-size: var(--text-5xl); }
+
+.font-normal { font-weight: var(--font-normal); }
+.font-medium { font-weight: var(--font-medium); }
+.font-semibold { font-weight: var(--font-semibold); }
+.font-bold { font-weight: var(--font-bold); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-tertiary { color: var(--color-text-tertiary); }
+.text-muted { color: var(--color-text-muted); }
+
+/* ============================================
+   FOCUS STATES (ACCESSIBILITY)
+   ============================================ */
+
+/* Global focus ring for keyboard navigation */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Interactive elements should have visible focus */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ============================================
+   LINKS
+   ============================================ */
+
+a {
+  color: var(--color-primary-400);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-in-out);
+}
+
+a:hover {
+  color: var(--color-primary-300);
+}
+
+/* ============================================
+   BUTTONS (BASE RESET)
+   ============================================ */
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: var(--color-surface-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-3);
+  transition: border-color var(--duration-fast) var(--ease-in-out),
+              box-shadow var(--duration-fast) var(--ease-in-out);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(0, 195, 138, 0.15);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* ============================================
+   SCROLLBAR STYLES
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-secondary);
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-muted);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-secondary) transparent;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+/* Visually hidden but accessible to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-primary-500);
+  color: var(--color-text-inverse);
+  z-index: var(--z-tooltip);
+  transition: top var(--duration-fast);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   INTERACTIVE STATE UTILITIES
+   ============================================ */
+
+.interactive {
+  transition: transform var(--duration-fast) var(--ease-in-out),
+              box-shadow var(--duration-fast) var(--ease-in-out);
+}
+
+.interactive:hover {
+  transform: var(--transform-lift-sm);
+}
+
+.interactive:active {
+  transform: var(--transform-scale-press);
+}
+
+.card-interactive {
+  transition: transform var(--duration-normal) var(--ease-in-out),
+              box-shadow var(--duration-normal) var(--ease-in-out),
+              border-color var(--duration-normal) var(--ease-in-out);
+}
+
+.card-interactive:hover {
+  transform: var(--transform-lift-md);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-border-secondary);
+}
+
+/* ============================================
+   ANIMATION KEYFRAMES
+   ============================================ */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slide-down {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* Animation utility classes */
+.animate-spin { animation: spin 1s linear infinite; }
+.animate-pulse { animation: pulse 2s ease-in-out infinite; }
+.animate-shimmer { 
+  animation: shimmer 2s infinite;
+  background: linear-gradient(90deg, var(--color-surface-primary) 25%, var(--color-surface-elevated) 50%, var(--color-surface-primary) 75%);
+  background-size: 200% 100%;
+}
+.animate-fade-in { animation: fade-in var(--duration-normal) var(--ease-out); }
+.animate-slide-up { animation: slide-up var(--duration-normal) var(--ease-out); }
+.animate-slide-down { animation: slide-down var(--duration-normal) var(--ease-out); }
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* ============================================
+   CODE/MONO TEXT
+   ============================================ */
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+code {
+  background-color: var(--color-surface-elevated);
+  padding: var(--space-0-5) var(--space-1-5);
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: var(--color-surface-primary);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ============================================
+   ARIA LIVE REGIONS
+   ============================================ */
+
+[aria-live="polite"],
+[aria-live="assertive"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+

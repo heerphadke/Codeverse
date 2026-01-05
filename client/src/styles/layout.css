@@ -1,0 +1,505 @@
+/**
+ * Codeverse Layout System
+ * =======================
+ * 
+ * Global layout rules for:
+ * - Containers & max-widths
+ * - Vertical rhythm
+ * - Grid systems
+ * - Section spacing
+ * - Card layouts
+ * 
+ * RULES:
+ * - Use .container for centered content
+ * - Use .section for major page sections
+ * - Use grid utilities for card layouts
+ * - All spacing via tokens ONLY
+ */
+
+/* Import spacing tokens */
+@import './spacing.css';
+
+/* ============================================
+   CONTAINER SYSTEM
+   ============================================ */
+
+/* Base container - centered with side gutters */
+.container {
+  width: 100%;
+  max-width: var(--container-xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+/* Responsive container gutters */
+@media (min-width: 640px) {
+  .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* Container variants */
+.container-sm { max-width: var(--container-sm); }
+.container-md { max-width: var(--container-md); }
+.container-lg { max-width: var(--container-lg); }
+.container-xl { max-width: var(--container-xl); }
+.container-2xl { max-width: var(--container-2xl); }
+
+/* Content width for readable text */
+.content-width {
+  max-width: var(--content-width);
+}
+
+.content-width-wide {
+  max-width: var(--content-width-wide);
+}
+
+.content-width-narrow {
+  max-width: var(--content-width-narrow);
+}
+
+/* ============================================
+   SECTION SPACING
+   ============================================ */
+
+/* Standard section */
+.section {
+  padding-top: var(--space-section-md);
+  padding-bottom: var(--space-section-md);
+}
+
+.section-sm {
+  padding-top: var(--space-section-sm);
+  padding-bottom: var(--space-section-sm);
+}
+
+.section-lg {
+  padding-top: var(--space-section-lg);
+  padding-bottom: var(--space-section-lg);
+}
+
+.section-xl {
+  padding-top: var(--space-section-xl);
+  padding-bottom: var(--space-section-xl);
+}
+
+/* Section with header offset (after sticky header) */
+.section-hero {
+  padding-top: calc(var(--space-section-lg) + 64px); /* Header height + section padding */
+  padding-bottom: var(--space-section-lg);
+}
+
+@media (min-width: 1024px) {
+  .section-hero {
+    padding-top: calc(var(--space-section-xl) + 64px);
+    padding-bottom: var(--space-section-xl);
+  }
+}
+
+/* ============================================
+   VERTICAL RHYTHM
+   ============================================ */
+
+/* Heading spacing */
+.section-header {
+  margin-bottom: var(--space-stack-xl);
+}
+
+.section-title {
+  margin-bottom: var(--space-stack-md);
+}
+
+.section-subtitle {
+  margin-bottom: var(--space-stack-lg);
+  max-width: var(--content-width);
+}
+
+/* Paragraph spacing */
+p + p {
+  margin-top: var(--space-stack-md);
+}
+
+/* Heading after content */
+h2, h3, h4 {
+  margin-top: var(--space-stack-xl);
+}
+
+h2:first-child,
+h3:first-child,
+h4:first-child {
+  margin-top: 0;
+}
+
+/* ============================================
+   GRID LAYOUTS
+   ============================================ */
+
+/* Base grid */
+.grid {
+  display: grid;
+  gap: var(--grid-gap-md);
+}
+
+/* Auto-fit responsive grid */
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+  gap: var(--grid-gap-md);
+}
+
+.grid-auto-sm {
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width-sm), 1fr));
+}
+
+/* Fixed column grids */
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Gap variants */
+.gap-sm { gap: var(--grid-gap-sm); }
+.gap-md { gap: var(--grid-gap-md); }
+.gap-lg { gap: var(--grid-gap-lg); }
+.gap-xl { gap: var(--grid-gap-xl); }
+
+/* ============================================
+   FLEX LAYOUTS
+   ============================================ */
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-center { justify-content: center; align-items: center; }
+.flex-between { justify-content: space-between; }
+.flex-start { align-items: flex-start; }
+.flex-end { align-items: flex-end; }
+
+/* Flex gaps */
+.flex-gap-xs { gap: var(--space-inline-xs); }
+.flex-gap-sm { gap: var(--space-inline-sm); }
+.flex-gap-md { gap: var(--space-inline-md); }
+.flex-gap-lg { gap: var(--space-inline-lg); }
+.flex-gap-xl { gap: var(--space-inline-xl); }
+
+/* ============================================
+   CARD SYSTEM
+   ============================================ */
+
+.card {
+  padding: var(--space-inset-xl);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-primary, #0a0a0f);
+  border: 1px solid var(--color-border-primary, rgba(255, 255, 255, 0.05));
+}
+
+.card-sm {
+  padding: var(--space-inset-md);
+  border-radius: var(--radius-lg);
+}
+
+.card-lg {
+  padding: var(--space-inset-2xl);
+  border-radius: var(--radius-2xl);
+}
+
+/* Card content spacing */
+.card-header {
+  margin-bottom: var(--space-stack-md);
+}
+
+.card-icon {
+  margin-bottom: var(--space-stack-md);
+}
+
+.card-title {
+  margin-bottom: var(--space-stack-sm);
+}
+
+.card-description {
+  color: var(--text-secondary, #a1a1aa);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+  padding-top: var(--space-section-lg);
+  padding-bottom: var(--space-section-lg);
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    padding-top: var(--space-section-xl);
+    padding-bottom: var(--space-section-xl);
+  }
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+@media (min-width: 1024px) {
+  .hero-content {
+    max-width: none;
+  }
+}
+
+.hero-headline {
+  margin-bottom: var(--space-stack-lg);
+}
+
+.hero-subheadline {
+  margin-bottom: var(--space-stack-xl);
+  max-width: 60ch;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-inline-lg);
+  margin-bottom: var(--space-stack-xl);
+}
+
+@media (max-width: 640px) {
+  .hero-cta-group {
+    flex-direction: column;
+    gap: var(--space-inline-md);
+  }
+  
+  .hero-cta-group > * {
+    width: 100%;
+  }
+}
+
+.hero-trust-line {
+  margin-bottom: var(--space-stack-xl);
+}
+
+.hero-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-inline-md);
+}
+
+/* ============================================
+   FEATURE SECTION
+   ============================================ */
+
+.features-section {
+  padding-top: var(--space-section-lg);
+  padding-bottom: var(--space-section-lg);
+}
+
+.features-header {
+  text-align: center;
+  margin-bottom: var(--space-section-sm);
+}
+
+.features-title {
+  margin-bottom: var(--space-stack-md);
+}
+
+.features-subtitle {
+  max-width: var(--content-width);
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-secondary, #a1a1aa);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-width), 1fr));
+  gap: var(--grid-gap-lg);
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+
+.cta-section {
+  padding-top: var(--space-section-lg);
+  padding-bottom: var(--space-section-lg);
+}
+
+.cta-card {
+  padding: var(--space-section-sm);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .cta-card {
+    padding: var(--space-section-md);
+  }
+}
+
+.cta-title {
+  margin-bottom: var(--space-stack-md);
+}
+
+.cta-description {
+  max-width: var(--content-width-narrow);
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-stack-xl);
+}
+
+/* ============================================
+   EDITOR MOCK SPACING
+   ============================================ */
+
+.editor-mock {
+  margin-top: var(--space-stack-xl);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.editor-mock-header {
+  padding: var(--space-inset-md);
+}
+
+.editor-mock-content {
+  padding: var(--space-inset-lg);
+}
+
+.editor-mock-footer {
+  padding: var(--space-inset-sm) var(--space-inset-md);
+}
+
+/* ============================================
+   STEP/PROCESS LAYOUTS
+   ============================================ */
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--grid-gap-lg);
+  text-align: center;
+}
+
+.step-item {
+  padding: var(--space-inset-md);
+}
+
+.step-number {
+  margin-bottom: var(--space-stack-md);
+}
+
+.step-title {
+  margin-bottom: var(--space-stack-sm);
+}
+
+/* ============================================
+   FOOTER SPACING
+   ============================================ */
+
+.footer {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+  border-top: 1px solid var(--color-border-primary, rgba(255, 255, 255, 0.05));
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-inline-lg);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-inline-xl);
+}
+
+/* ============================================
+   SPACING UTILITIES
+   ============================================ */
+
+/* Margin utilities */
+.mt-0 { margin-top: var(--space-0); }
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mt-5 { margin-top: var(--space-5); }
+.mt-6 { margin-top: var(--space-6); }
+.mt-8 { margin-top: var(--space-8); }
+.mt-10 { margin-top: var(--space-10); }
+.mt-12 { margin-top: var(--space-12); }
+
+.mb-0 { margin-bottom: var(--space-0); }
+.mb-1 { margin-bottom: var(--space-1); }
+.mb-2 { margin-bottom: var(--space-2); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
+.mb-5 { margin-bottom: var(--space-5); }
+.mb-6 { margin-bottom: var(--space-6); }
+.mb-8 { margin-bottom: var(--space-8); }
+.mb-10 { margin-bottom: var(--space-10); }
+.mb-12 { margin-bottom: var(--space-12); }
+
+/* Padding utilities */
+.p-0 { padding: var(--space-0); }
+.p-1 { padding: var(--space-1); }
+.p-2 { padding: var(--space-2); }
+.p-3 { padding: var(--space-3); }
+.p-4 { padding: var(--space-4); }
+.p-5 { padding: var(--space-5); }
+.p-6 { padding: var(--space-6); }
+.p-8 { padding: var(--space-8); }
+
+.px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
+.px-5 { padding-left: var(--space-5); padding-right: var(--space-5); }
+.px-6 { padding-left: var(--space-6); padding-right: var(--space-6); }
+.px-8 { padding-left: var(--space-8); padding-right: var(--space-8); }
+
+.py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
+.py-5 { padding-top: var(--space-5); padding-bottom: var(--space-5); }
+.py-6 { padding-top: var(--space-6); padding-bottom: var(--space-6); }
+.py-8 { padding-top: var(--space-8); padding-bottom: var(--space-8); }
+
+/* ============================================
+   RESPONSIVE VISIBILITY
+   ============================================ */
+
+@media (max-width: 640px) {
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hide-tablet { display: none !important; }
+}
+
+@media (min-width: 1025px) {
+  .hide-desktop { display: none !important; }
+}
+

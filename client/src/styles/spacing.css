@@ -1,0 +1,153 @@
+/**
+ * Codeverse Spacing System
+ * ========================
+ * 
+ * SINGLE SOURCE OF TRUTH for all spacing values.
+ * Use ONLY these tokens for padding, margin, and gap.
+ * 
+ * Base unit: 4px
+ * 
+ * RULES:
+ * - NO magic pixel values in components
+ * - NO inline margin/padding without tokens
+ * - ALL spacing must reference --space-* tokens
+ * - Use gap/grid instead of margins where possible
+ */
+
+:root {
+  /* ============================================
+     SPACING SCALE (4px base)
+     ============================================ */
+  
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 2px;    /* 0.5 × 4 */
+  --space-1: 4px;      /* 1 × 4 */
+  --space-1-5: 6px;    /* 1.5 × 4 */
+  --space-2: 8px;      /* 2 × 4 */
+  --space-2-5: 10px;   /* 2.5 × 4 */
+  --space-3: 12px;     /* 3 × 4 */
+  --space-3-5: 14px;   /* 3.5 × 4 */
+  --space-4: 16px;     /* 4 × 4 */
+  --space-5: 20px;     /* 5 × 4 */
+  --space-6: 24px;     /* 6 × 4 */
+  --space-7: 28px;     /* 7 × 4 */
+  --space-8: 32px;     /* 8 × 4 */
+  --space-9: 36px;     /* 9 × 4 */
+  --space-10: 40px;    /* 10 × 4 */
+  --space-11: 44px;    /* 11 × 4 - min touch target */
+  --space-12: 48px;    /* 12 × 4 */
+  --space-14: 56px;    /* 14 × 4 */
+  --space-16: 64px;    /* 16 × 4 */
+  --space-18: 72px;    /* 18 × 4 */
+  --space-20: 80px;    /* 20 × 4 */
+  --space-24: 96px;    /* 24 × 4 */
+  --space-28: 112px;   /* 28 × 4 */
+  --space-32: 128px;   /* 32 × 4 */
+
+  /* ============================================
+     SEMANTIC SPACING TOKENS
+     Named for their purpose, not size
+     ============================================ */
+  
+  /* Vertical rhythm baseline (matches 1.5 line-height × 16px) */
+  --baseline: 24px;
+  
+  /* Inline spacing (between elements) */
+  --space-inline-xs: var(--space-1);   /* 4px - tight */
+  --space-inline-sm: var(--space-2);   /* 8px - compact */
+  --space-inline-md: var(--space-3);   /* 12px - default */
+  --space-inline-lg: var(--space-4);   /* 16px - spacious */
+  --space-inline-xl: var(--space-6);   /* 24px - loose */
+  
+  /* Stack spacing (between stacked elements) */
+  --space-stack-xs: var(--space-2);    /* 8px */
+  --space-stack-sm: var(--space-3);    /* 12px */
+  --space-stack-md: var(--space-4);    /* 16px - paragraph spacing */
+  --space-stack-lg: var(--space-6);    /* 24px - section intro */
+  --space-stack-xl: var(--space-8);    /* 32px - section heading */
+  --space-stack-2xl: var(--space-14);  /* 56px - major section gap */
+  
+  /* Card/box padding */
+  --space-inset-xs: var(--space-2);    /* 8px */
+  --space-inset-sm: var(--space-3);    /* 12px */
+  --space-inset-md: var(--space-4);    /* 16px */
+  --space-inset-lg: var(--space-5);    /* 20px */
+  --space-inset-xl: var(--space-6);    /* 24px */
+  --space-inset-2xl: var(--space-8);   /* 32px */
+  
+  /* Section padding */
+  --space-section-sm: var(--space-12); /* 48px */
+  --space-section-md: var(--space-16); /* 64px */
+  --space-section-lg: var(--space-20); /* 80px */
+  --space-section-xl: var(--space-24); /* 96px */
+
+  /* ============================================
+     CONTAINER WIDTHS
+     ============================================ */
+  
+  --container-xs: 480px;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+  
+  /* Content width for readable measure */
+  --content-width: 65ch;       /* ~65 characters - optimal reading */
+  --content-width-wide: 75ch;  /* ~75 characters - max readable */
+  --content-width-narrow: 50ch; /* ~50 characters - narrow columns */
+
+  /* ============================================
+     GRID & GAP TOKENS
+     ============================================ */
+  
+  --grid-gap-sm: var(--space-4);   /* 16px */
+  --grid-gap-md: var(--space-6);   /* 24px */
+  --grid-gap-lg: var(--space-8);   /* 32px */
+  --grid-gap-xl: var(--space-12);  /* 48px */
+  
+  /* Card grid minimums */
+  --card-min-width: 280px;
+  --card-min-width-sm: 240px;
+
+  /* ============================================
+     TOUCH TARGETS (Accessibility)
+     ============================================ */
+  
+  --touch-target-min: 44px;  /* WCAG minimum */
+  --touch-target-md: 48px;
+  --touch-target-lg: 56px;
+
+  /* ============================================
+     BORDER RADIUS SCALE
+     ============================================ */
+  
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ============================================
+   RESPONSIVE SPACING ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  :root {
+    /* Reduce section padding on mobile */
+    --space-section-sm: var(--space-10);  /* 40px */
+    --space-section-md: var(--space-12);  /* 48px */
+    --space-section-lg: var(--space-16);  /* 64px */
+    --space-section-xl: var(--space-20);  /* 80px */
+    
+    /* Tighter card grid on mobile */
+    --grid-gap-md: var(--space-4);  /* 16px */
+    --grid-gap-lg: var(--space-6);  /* 24px */
+  }
+}
+
